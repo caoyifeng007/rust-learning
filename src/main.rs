@@ -1,11 +1,13 @@
+use std::io;
+
 fn main() {
     println!("Hello, world!");
 
-    let mut v1;
+    let mut guess = String::new();
 
-    v1 = 12;
-    println!("The variable before is: {}", v1);
+    let emoj = '😂';
 
-    v1 = 10;
-    println!("The variable after is: {}", v1);
+    io::stdin()
+        .read_line(&mut guess)
+        .expect("Failed to read line");
 }
