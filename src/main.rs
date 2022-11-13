@@ -1,13 +1,27 @@
 use std::io;
 
+// fn main() {
+//     println!("Hello, world!");
+
+//     let mut guess = String::new();
+
+//     let emoj = '😂';
+
+//     io::stdin()
+//         .read_line(&mut guess)
+//         .expect("Failed to read line");
+// }
+
 fn main() {
-    println!("Hello, world!");
+    let mut counter = 0;
 
-    let mut guess = String::new();
+    let result = loop {
+        counter += 1;
 
-    let emoj = '😂';
+        if counter == 10 {
+            break counter * 2;
+        }
+    };
 
-    io::stdin()
-        .read_line(&mut guess)
-        .expect("Failed to read line");
+    println!("The result is {result}");
 }
