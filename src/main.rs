@@ -46,26 +46,34 @@ use std::io;
 //     println!("{}", s2); // Not valid because s2 is moved
 // }
 
-fn decr_twice_v1(n: u32) -> Option<u32> {
-    match n {
-        0 => None,
-        1 => None,
-        n2 => {
-            println!("{}", n2);
-            Some(n2 - 2)
-        }
-    }
-}
+// fn decr_twice_v1(n: u32) -> Option<u32> {
+//     match n {
+//         0 => None,
+//         1 => None,
+//         n2 => {
+//             println!("{}", n2);
+//             Some(n2 - 2)
+//         }
+//     }
+// }
 
-fn decr_twice_v2(n: u32) -> Option<u32> {
-    if n == 0 {
-        None
-    } else if n == 1 {
-        None
-    } else {
-        Some(n - 2)
-    }
-}
-fn main() {
-    let out = decr_twice_v1(2);
+// fn decr_twice_v2(n: u32) -> Option<u32> {
+//     if n == 0 {
+//         None
+//     } else if n == 1 {
+//         None
+//     } else {
+//         Some(n - 2)
+//     }
+// }
+// fn main() {
+//     let out = decr_twice_v1(2);
+// }
+
+mod front_of_house;
+
+pub use crate::front_of_house::hosting;
+
+pub fn eat_at_restaurant() {
+    hosting::add_to_waitlist();
 }
