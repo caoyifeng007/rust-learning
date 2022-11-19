@@ -1,4 +1,4 @@
-use std::io;
+// use std::io;
 
 // fn main() {
 //     println!("Hello, world!");
@@ -70,10 +70,46 @@ use std::io;
 //     let out = decr_twice_v1(2);
 // }
 
-mod front_of_house;
+// fn main() {
+//     let v = vec![1, 2, 3, 4, 5];
 
-pub use crate::front_of_house::hosting;
+//     let third: &i32 = &v[2];
+//     println!("The third element is {}", third);
 
-pub fn eat_at_restaurant() {
-    hosting::add_to_waitlist();
+//     let third: Option<&i32> = v.get(2);
+//     match third {
+//         Some(third) => println!("The third element is {}", third),
+//         None => println!("There is no third element."),
+//     }
+// }
+
+// fn main() {
+//     let v = vec![1, 2, 3, 4, 5];
+
+//     let does_not_exist = &v[100];
+//     let does_not_exist = v.get(100);
+// }
+
+// fn main() {
+//     let mut v = vec![1, 2, 3, 4, 5];
+
+//     let first = &v[2];
+
+//     v.push(6);
+
+//     println!("The first element is: {}", first);
+// }
+
+// fn main() {
+//     let mut s = String::from("foo");
+//     s.push_str("bar");
+// }
+
+fn main() {
+    let mut v = Vec::new();
+    let s = String::from("Hello ");
+    v.push(s);
+    v[0].push_str("world");
+    println!("original: {}", s);
+    println!("new: {}", v[0]);
 }
