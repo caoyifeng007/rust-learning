@@ -105,11 +105,59 @@
 //     s.push_str("bar");
 // }
 
+// fn main() {
+//     let mut v = Vec::new();
+//     let s = String::from("Hello ");
+//     v.push(s);
+//     v[0].push_str("world");
+//     println!("original: {}", s);
+//     println!("new: {}", v[0]);
+// }
+//     println!("new: {}", v[0]);
+
+// fn main() {
+//     let s1 = String::from("tic");
+//     let s2 = String::from("tac");
+//     let s3 = String::from("toe");
+
+//     let s = s1 + "-" + &s2 + "-" + &s3;
+
+//     println!("{}", s1)
+// }
+
+// fn main() {
+//     let s1 = String::from("tic");
+//     let s2 = String::from("tac");
+//     let s3 = String::from("toe");
+
+//     let s = format!("{}-{}-{}", s1, s2, s3);
+
+//     println!("{}", s1)
+// }
+
+// fn main() {
+//     use std::collections::HashMap;
+
+//     let mut scores = HashMap::new();
+
+//     scores.insert(String::from("Blue"), 10);
+//     scores.insert(String::from("Yellow"), 50);
+
+//     let team_name = String::from("Blue");
+//     let score = scores.get(&team_name).copied().unwrap_or(0);
+
+//     println!("{}", score);
+// }
+
 fn main() {
-    let mut v = Vec::new();
-    let s = String::from("Hello ");
-    v.push(s);
-    v[0].push_str("world");
-    println!("original: {}", s);
-    println!("new: {}", v[0]);
+    use std::collections::HashMap;
+
+    let mut scores = HashMap::new();
+    scores.insert(String::from("Blue"), 10);
+
+    let yellow_value_ref = scores.entry(String::from("Yellow")).or_insert(50);
+    *yellow_value_ref += 1;
+    scores.entry(String::from("Blue")).or_insert(50);
+
+    println!("{:?}", scores);
 }
