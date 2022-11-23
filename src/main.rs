@@ -149,15 +149,26 @@
 //     println!("{}", score);
 // }
 
-fn main() {
-    use std::collections::HashMap;
+// use std::str::Chars;
 
-    let mut scores = HashMap::new();
-    scores.insert(String::from("Blue"), 10);
+// fn main() {
+//     use std::collections::HashMap;
 
-    let yellow_value_ref = scores.entry(String::from("Yellow")).or_insert(50);
-    *yellow_value_ref += 1;
-    scores.entry(String::from("Blue")).or_insert(50);
+//     let mut scores = HashMap::new();
+//     scores.insert(String::from("Blue"), 10);
 
-    println!("{:?}", scores);
+//     let yellow_value_ref = scores.entry(String::from("Yellow")).or_insert(50);
+//     *yellow_value_ref += 1;
+//     scores.entry(String::from("Blue")).or_insert(50);
+
+//     println!("{:?}", scores);
+// }
+
+use std::error::Error;
+use std::fs::File;
+
+fn main() -> Result<(), Box<dyn Error>> {
+    let greeting_file = File::open("hello.txt")?;
+
+    Ok(())
 }
