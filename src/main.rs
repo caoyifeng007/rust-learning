@@ -173,40 +173,78 @@
 //     Ok(())
 // }
 
-fn largest_i32(list: &[i32]) -> &i32 {
-    let mut largest = &list[0];
+// fn largest_i32(list: &[i32]) -> &i32 {
+//     let mut largest = &list[0];
 
-    for item in list {
-        if item > largest {
-            largest = item;
-        }
-    }
+//     for item in list {
+//         if item > largest {
+//             largest = item;
+//         }
+//     }
 
-    largest
+//     largest
+// }
+
+// fn largest_char(list: &[char]) -> &char {
+//     let mut largest = &list[0];
+
+//     for item in list {
+//         if item > largest {
+//             largest = item;
+//         }
+//     }
+
+//     largest
+// }
+
+// fn main() {
+//     let number_list = vec![34, 50, 25, 100, 65];
+
+//     let result = largest_i32(&number_list);
+//     println!("The largest number is {}", result);
+//     assert_eq!(*result, 100);
+
+//     let char_list = vec!['y', 'm', 'a', 'q'];
+
+//     let result = largest_char(&char_list);
+//     println!("The largest char is {}", result);
+//     assert_eq!(*result, 'y');
+// }
+
+// fn print_slice<T>(v: &[T]) {
+//     for x in v {
+//         println!("{x}");
+//     }
+// }
+
+// fn main() {
+//     print_slice(&[1, 2, 3]);
+
+//     let v = vec![1, 2, 3, 4, 5];
+
+//     let third: &i32 = &v[2];
+//     println!("The third element is {}", third);
+
+//     for i in &v {
+//         println!("{}", i);
+//     }
+// }
+
+struct Point<T> {
+    x: T,
+    y: T,
 }
-
-fn largest_char(list: &[char]) -> &char {
-    let mut largest = &list[0];
-
-    for item in list {
-        if item > largest {
-            largest = item;
-        }
+impl Point<i32> {
+    fn f(&self) -> &i32 {
+        &self.y
     }
-
-    largest
 }
-
+impl<T> Point<T> {
+    fn f(&self) -> &T {
+        &self.x
+    }
+}
 fn main() {
-    let number_list = vec![34, 50, 25, 100, 65];
-
-    let result = largest_i32(&number_list);
-    println!("The largest number is {}", result);
-    assert_eq!(*result, 100);
-
-    let char_list = vec!['y', 'm', 'a', 'q'];
-
-    let result = largest_char(&char_list);
-    println!("The largest char is {}", result);
-    assert_eq!(*result, 'y');
+    let p: Point<i32> = Point { x: 1, y: 2 };
+    println!("{}", p.f());
 }
