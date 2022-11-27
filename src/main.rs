@@ -230,21 +230,57 @@
 //     }
 // }
 
-struct Point<T> {
+// struct Point<T> {
+//     x: T,
+//     y: T,
+// }
+// impl Point<i32> {
+//     fn f(&self) -> &i32 {
+//         &self.y
+//     }
+// }
+// impl<T> Point<T> {
+//     fn f(&self) -> &T {
+//         &self.x
+//     }
+// }
+// fn main() {
+//     let p: Point<i32> = Point { x: 1, y: 2 };
+//     println!("{}", p.f());
+// }
+
+// fn clonable<T: Clone>(t: T) -> impl Clone {
+//     t
+// }
+// fn main() {
+//     let s = String::from("hello");
+//     let s2 = clonable(s);
+//     println!("{}", s2.clone());
+// }
+
+use std::fmt::Display;
+
+struct Pair<T> {
     x: T,
     y: T,
 }
-impl Point<i32> {
-    fn f(&self) -> &i32 {
-        &self.y
+
+impl<T> Pair<T> {
+    fn new(x: T, y: T) -> Self {
+        Self { x, y }
     }
 }
-impl<T> Point<T> {
-    fn f(&self) -> &T {
-        &self.x
+
+impl<T: Display + PartialOrd> Pair<T> {
+    fn cmp_display(&self) {
+        if self.x >= self.y {
+            println!("The largest member is x = {}", self.x);
+        } else {
+            println!("The largest member is y = {}", self.y);
+        }
     }
 }
-fn main() {
-    let p: Point<i32> = Point { x: 1, y: 2 };
-    println!("{}", p.f());
+
+impl<T: Display> ToString for T {
+    // --snip--
 }
