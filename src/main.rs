@@ -258,29 +258,54 @@
 //     println!("{}", s2.clone());
 // }
 
-use std::fmt::Display;
+// use std::fmt::Display;
 
-struct Pair<T> {
-    x: T,
-    y: T,
+// struct Pair<T> {
+//     x: T,
+//     y: T,
+// }
+
+// impl<T> Pair<T> {
+//     fn new(x: T, y: T) -> Self {
+//         Self { x, y }
+//     }
+// }
+
+// impl<T: Display + PartialOrd> Pair<T> {
+//     fn cmp_display(&self) {
+//         if self.x >= self.y {
+//             println!("The largest member is x = {}", self.x);
+//         } else {
+//             println!("The largest member is y = {}", self.y);
+//         }
+//     }
+// }
+
+// impl<T: Display> ToString for T {
+//     // --snip--
+// }
+
+struct ImportantExcerpt<'a> {
+    part: &'a str,
 }
 
-impl<T> Pair<T> {
-    fn new(x: T, y: T) -> Self {
-        Self { x, y }
+impl<'a> ImportantExcerpt<'a> {
+    fn level(&self) -> i32 {
+        3
     }
 }
 
-impl<T: Display + PartialOrd> Pair<T> {
-    fn cmp_display(&self) {
-        if self.x >= self.y {
-            println!("The largest member is x = {}", self.x);
-        } else {
-            println!("The largest member is y = {}", self.y);
-        }
+impl<'a> ImportantExcerpt<'a> {
+    fn announce_and_return_part(&self, announcement: &str) -> &str {
+        println!("Attention please: {}", announcement);
+        self.part
     }
 }
 
-impl<T: Display> ToString for T {
-    // --snip--
+fn main() {
+    let novel = String::from("Call me Ishmael. Some years ago...");
+    let first_sentence = novel.split('.').next().expect("Could not find a '.'");
+    let i = ImportantExcerpt {
+        part: first_sentence,
+    };
 }
