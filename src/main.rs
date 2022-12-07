@@ -285,27 +285,50 @@
 //     // --snip--
 // }
 
-struct ImportantExcerpt<'a> {
-    part: &'a str,
-}
+// struct ImportantExcerpt<'a> {
+//     part: &'a str,
+// }
 
-impl<'a> ImportantExcerpt<'a> {
-    fn level(&self) -> i32 {
-        3
-    }
-}
+// impl<'a> ImportantExcerpt<'a> {
+//     fn level(&self) -> i32 {
+//         3
+//     }
+// }
 
-impl<'a> ImportantExcerpt<'a> {
-    fn announce_and_return_part(&self, announcement: &str) -> &str {
-        println!("Attention please: {}", announcement);
-        self.part
-    }
-}
+// impl<'a> ImportantExcerpt<'a> {
+//     fn announce_and_return_part(&self, announcement: &str) -> &str {
+//         println!("Attention please: {}", announcement);
+//         self.part
+//     }
+// }
+
+// fn main() {
+//     let novel = String::from("Call me Ishmael. Some years ago...");
+//     let first_sentence = novel.split('.').next().expect("Could not find a '.'");
+//     let i = ImportantExcerpt {
+//         part: first_sentence,
+//     };
+// }
+
+// use std::fs::File;
+// use std::io::ErrorKind;
+
+// fn main() {
+//     let greeting_file = File::open("hello.txt").unwrap_or_else(|error| {
+//         if error.kind() == ErrorKind::NotFound {
+//             File::create("hello.txt").unwrap_or_else(|error| {
+//                 panic!("Problem creating the file: {:?}", error);
+//             })
+//         } else {
+//             panic!("Problem opening the file: {:?}", error);
+//         }
+//     });
+// }
+
+use std::fs::File;
 
 fn main() {
-    let novel = String::from("Call me Ishmael. Some years ago...");
-    let first_sentence = novel.split('.').next().expect("Could not find a '.'");
-    let i = ImportantExcerpt {
-        part: first_sentence,
-    };
+    // let greeting_file = File::open("hello.txt").unwrap();
+    let greeting_file =
+        File::open("hello.txt").expect("hello.txt should be included in this project");
 }
