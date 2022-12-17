@@ -329,6 +329,19 @@ use std::fs::File;
 
 fn main() {
     // let greeting_file = File::open("hello.txt").unwrap();
-    let greeting_file =
-        File::open("hello.txt").expect("hello.txt should be included in this project");
+    // let greeting_file =
+    //     File::open("hello.txt").expect("hello.txt should be included in this project");
+
+    let s1 = String::from("hello");
+    println!("{}", s1.len());
+
+    let s2 = &s1;
+    println!("{}", s2.len());
+
+    // let len = calculate_length(&s1);
+    let v = vec![100, 32, 57];
+    for i in &v {
+        println!("{}", i);
+    }
+    println!("{}", v.len());
 }
