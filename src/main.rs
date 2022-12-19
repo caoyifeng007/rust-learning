@@ -325,23 +325,45 @@
 //     });
 // }
 
-use std::fs::File;
+// use std::fs::File;
+
+// fn main() {
+//     // let greeting_file = File::open("hello.txt").unwrap();
+//     // let greeting_file =
+//     //     File::open("hello.txt").expect("hello.txt should be included in this project");
+
+//     let s1 = String::from("hello");
+//     println!("{}", s1.len());
+
+//     let s2 = &s1;
+//     println!("{}", s2.len());
+
+//     // let len = calculate_length(&s1);
+//     let v = vec![100, 32, 57];
+//     for i in &v {
+//         println!("{}", i);
+//     }
+//     println!("{}", v.len());
+// }
+
+// enum List {
+//     Cons(i32, List),
+//     Nil,
+// }
+
+// use crate::List::{Cons, Nil};
+
+// fn main() {
+//     let list = Cons(1, Cons(2, Cons(3, Nil)));
+// }
 
 fn main() {
-    // let greeting_file = File::open("hello.txt").unwrap();
-    // let greeting_file =
-    //     File::open("hello.txt").expect("hello.txt should be included in this project");
+    let x = 5;
+    // let y = &mut x;
+    let mut y = &x;
+    println!("{}", *y);
 
-    let s1 = String::from("hello");
-    println!("{}", s1.len());
-
-    let s2 = &s1;
-    println!("{}", s2.len());
-
-    // let len = calculate_length(&s1);
-    let v = vec![100, 32, 57];
-    for i in &v {
-        println!("{}", i);
-    }
-    println!("{}", v.len());
+    let z = 6;
+    y = &z;
+    println!("{}", *y);
 }
