@@ -357,13 +357,34 @@
 //     let list = Cons(1, Cons(2, Cons(3, Nil)));
 // }
 
-fn main() {
-    let x = 5;
-    // let y = &mut x;
-    let mut y = &x;
-    println!("{}", *y);
+// fn main() {
+//     let x = 5;
+//     // let y = &mut x;
+//     let mut y = &x;
+//     println!("{}", *y);
 
-    let z = 6;
-    y = &z;
-    println!("{}", *y);
+//     let z = 6;
+//     y = &z;
+//     println!("{}", *y);
+// }
+
+use crate::List::{Cons, Nil};
+use std::cell::RefCell;
+use std::rc::Rc;
+
+#[derive(Debug)]
+enum List {
+    Cons(i32, RefCell<Rc<List>>),
+    Nil,
 }
+
+impl List {
+    fn tail(&self) -> Option<&RefCell<Rc<List>>> {
+        match self {
+            Cons(_, item) => Some(item),
+            Nil => None,
+        }
+    }
+}
+
+fn main() {}
