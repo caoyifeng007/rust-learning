@@ -1,3 +1,5 @@
+// mod smart_pointer;
+
 // use std::io;
 
 // fn main() {
@@ -368,45 +370,322 @@
 //     println!("{}", *y);
 // }
 
-use crate::List::{Cons, Nil};
-use std::cell::RefCell;
-use std::rc::Rc;
+// use crate::List::{Cons, Nil};
+// use std::cell::RefCell;
+// use std::rc::Rc;
 
-#[derive(Debug)]
-enum List {
-    Cons(i32, RefCell<Rc<List>>),
-    Nil,
-}
+// #[derive(Debug)]
+// enum List {
+//     Cons(i32, RefCell<Rc<List>>),
+//     Nil,
+// }
 
-impl List {
-    fn tail(&self) -> Option<&RefCell<Rc<List>>> {
-        match self {
-            Cons(_, item) => Some(item),
-            Nil => None,
-        }
+// impl List {
+//     fn tail(&self) -> Option<&RefCell<Rc<List>>> {
+//         match self {
+//             Cons(_, item) => Some(item),
+//             Nil => None,
+//         }
+//     }
+// }
+
+// fn main() {
+//     let a = Rc::new(Cons(5, RefCell::new(Rc::new(Nil))));
+
+//     println!("a initial rc count = {}", Rc::strong_count(&a));
+//     println!("a next item = {:?}", a.tail());
+
+//     let b = Rc::new(Cons(10, RefCell::new(Rc::clone(&a))));
+
+//     println!("a rc count after b creation = {}", Rc::strong_count(&a));
+//     println!("b initial rc count = {}", Rc::strong_count(&b));
+//     println!("b next item = {:?}", b.tail());
+
+//     if let Some(link) = a.tail() {
+//         *link.borrow_mut() = Rc::clone(&b);
+//     }
+
+//     println!("b rc count after changing a = {}", Rc::strong_count(&b));
+//     println!("a rc count after changing a = {}", Rc::strong_count(&a));
+
+//     // Uncomment the next line to see that we have a cycle;
+//     // it will overflow the stack
+//     println!("a next item = {:?}", a.tail());
+// }
+
+// #[derive(Debug)]
+// enum List {
+//     Cons(Rc<RefCell<i32>>, Rc<List>),
+//     Nil,
+// }
+
+// use crate::List::{Cons, Nil};
+// use std::cell::RefCell;
+// use std::rc::Rc;
+
+// fn main() {
+//     let value = Rc::new(RefCell::new(5));
+
+//     let a = Rc::new(Cons(Rc::clone(&value), Rc::new(Nil)));
+
+//     let b = Cons(Rc::new(RefCell::new(3)), Rc::clone(&a));
+//     let c = Cons(Rc::new(RefCell::new(4)), Rc::clone(&a));
+
+//     *value.borrow_mut() += 10;
+
+//     println!("a after = {:#?}", a);
+//     println!("b after = {:#?}", b);
+//     println!("c after = {:#?}", c);
+// }
+
+// use std::sync::mpsc;
+// use std::thread;
+// use std::time::Duration;
+
+// fn main() {
+//     let (tx, rx) = mpsc::channel();
+
+//     let tx1 = tx.clone();
+
+//     thread::spawn(move || {
+//         let vals = vec![
+//             String::from("hi"),
+//             String::from("from"),
+//             String::from("the"),
+//             String::from("thread"),
+//         ];
+
+//         for val in vals {
+//             tx1.send(val).unwrap();
+//             thread::sleep(Duration::from_secs(1));
+//         }
+//     });
+
+//     thread::spawn(move || {
+//         let vals = vec![
+//             String::from("more"),
+//             String::from("messages"),
+//             String::from("for"),
+//             String::from("you"),
+//         ];
+
+//         for val in vals {
+//             tx.send(val).unwrap();
+//             thread::sleep(Duration::from_secs(1));
+//         }
+//     });
+
+//     for received in rx {
+//         println!("Main thread Got: {}", received);
+//     }
+// }
+
+// #![allow(unused)]
+// fn main() {
+// use std::borrow::Cow;
+
+// fn abs_all(input: &mut Cow<'_, [i32]>) {
+//     for i in 0..input.len() {
+//         let v = input[i];
+//         if v < 0 {
+//             // Clones into a vector if not already owned.
+//             input.to_mut()[i] = -v;
+//         }
+//     }
+// }
+
+// // No clone occurs because `input` doesn't need to be mutated.
+// let slice = [0, 1, 2];
+// let mut input = Cow::from(&slice[..]);
+// abs_all(&mut input);
+// println!("{:?}", slice);
+// println!("{:?}", input);
+
+// // Clone occurs because `input` needs to be mutated.
+// let slice = [-1, 0, 1];
+// let mut input = Cow::from(&slice[..]);
+// abs_all(&mut input);
+// println!("{:?}", slice);
+// println!("{:?}", input);
+
+// // No clone occurs because `input` is already owned.
+// let mut input = Cow::from(vec![-1, 0, 1]);
+// abs_all(&mut input);
+// println!("{:?}", slice);
+// println!("{:?}", input);
+
+// let mut setting_value = Some(5);
+// let new_setting_value = Some(10);
+
+// match (setting_value, new_setting_value) {
+//     (Some(_), Some(_)) => {
+//         println!("Can't overwrite an existing customized value");
+//     }
+//     _ => {
+//         setting_value = new_setting_value;
+//     }
+// }
+
+// println!("setting is {:?}", setting_value);
+
+// enum Message {
+//     Hello { id: i32 },
+// }
+
+// let msg = Message::Hello { id: 5 };
+
+// match msg {
+//     Message::Hello {
+//         id: id_variable @ 3..=7,
+//     } => println!("Found an id in range: {}", id_variable),
+//     Message::Hello { id @ 10..=12 } => {
+//         println!("Found an id {} in another range", id)
+//     }
+//     Message::Hello { id } => println!("Found some other id: {}", id),
+// }
+
+// use std::thread;
+
+// let v = vec![1, 2, 3];
+
+// let s: String = "Hello World!".to_string();
+// let a = 1;
+
+// fn a(a: u32) -> u23 {
+//     a
+// }
+// let handle = thread::spawn(|| {
+//     println!("Here's a vector: {:?}", v);
+// });
+// handle.join().unwrap();
+// }
+
+// fn main() {
+//     // let mut x: i32 = 10;
+//     // let ref_x = &mut x;
+//     // *ref_x = 20;
+//     // println!("x: {}", x);
+
+//     let mut a: [i32; 6] = [10, 20, 30, 40, 50, 60];
+//     println!("a: {a:?}");
+
+//     let s: &[i32] = &a[2..4];
+
+//     println!("s: {s:?}");
+// }
+
+// use std::num::ParseIntError;
+// use std::str::FromStr;
+
+// #[derive(Debug, PartialEq)]
+// struct Person {
+//     name: String,
+//     age: usize,
+// }
+
+// // We will use this error type for the `FromStr` implementation.
+// #[derive(Debug, PartialEq)]
+// enum ParsePersonError {
+//     // Empty input string
+//     Empty,
+//     // Incorrect number of fields
+//     BadLen,
+//     // Empty name field
+//     NoName,
+//     // Wrapped error from parse::<usize>()
+//     ParseInt(ParseIntError),
+// }
+
+// impl FromStr for Person {
+//     type Err = ParsePersonError;
+//     fn from_str(s: &str) -> Result<Person, Self::Err> {
+//         if s.len() == 0 {
+//             return Err(ParsePersonError::Empty);
+//         }
+
+//         let split_v: Vec<&str> = s.split(',').collect();
+//         if split_v.len() != 2 {
+//             return Err(ParsePersonError::BadLen);
+//         }
+
+//         if split_v[0].len() == 0 {
+//             return Err(ParsePersonError::NoName);
+//         }
+
+//         match split_v[1].parse::<usize>() {
+//             Ok(age) => Ok(Person {
+//                 name: split_v[0].to_string(),
+//                 age: age,
+//             }),
+//             Err(err) => Err(ParsePersonError::ParseInt(err)),
+//         }
+//     }
+// }
+
+// fn main() {
+//     let p = "Mark,20".parse::<Person>().unwrap();
+//     println!("{:?}", p);
+
+//     let a = 2;
+//     let b = &a;
+//     let a = a + 1;
+//     println!("{a} {}", *b);
+
+//     println!("{:?}", second_word_to_upper("foo"));
+// }
+
+// fn second_word_to_upper(s: &str) -> Option<String> {
+//     let mut it = s.split(' ');
+//     let (Some(_), Some(item)) = (it.next(), it.next()) else {
+//         return None;
+//     };
+//     Some(item.to_uppercase())
+// }
+
+// #[derive(Clone, Debug)]
+// struct Point(i32, i32, String);
+
+// fn main() {
+//     let p1 = Point(3, 4, String::from("Hello"));
+//     let p2 = p1.clone();
+//     println!("p1: {p1:?}");
+//     println!("p2: {p2:?}");
+// }
+
+use mini_redis::{Connection, Frame};
+use tokio::net::{TcpListener, TcpStream};
+
+#[tokio::main]
+async fn main() {
+    // Bind the listener to the address
+    let listener = TcpListener::bind("127.0.0.1:6379").await.unwrap();
+
+    loop {
+        // This part is having a slight problem that is not current
+        // The second item contains the IP and port of the new connection.
+        // let (socket, _) = listener.accept().await.unwrap();
+        // process(socket).await;
+
+        // This part is doing well in current
+        let (socket, _) = listener.accept().await.unwrap();
+        // A new task is spawned for each inbound socket. The socket is
+        // moved to the new task and processed there.
+        tokio::spawn(async move {
+            process(socket).await;
+        });
     }
 }
 
-fn main() {
-    let a = Rc::new(Cons(5, RefCell::new(Rc::new(Nil))));
+async fn process(socket: TcpStream) {
+    // The `Connection` lets us read/write redis **frames** instead of
+    // byte streams. The `Connection` type is defined by mini-redis.
+    let mut connection = Connection::new(socket);
 
-    println!("a initial rc count = {}", Rc::strong_count(&a));
-    println!("a next item = {:?}", a.tail());
+    if let Some(frame) = connection.read_frame().await.unwrap() {
+        println!("GOT: {:?}", frame);
 
-    let b = Rc::new(Cons(10, RefCell::new(Rc::clone(&a))));
-
-    println!("a rc count after b creation = {}", Rc::strong_count(&a));
-    println!("b initial rc count = {}", Rc::strong_count(&b));
-    println!("b next item = {:?}", b.tail());
-
-    if let Some(link) = a.tail() {
-        *link.borrow_mut() = Rc::clone(&b);
+        // Respond with an error
+        let response = Frame::Error("unimplemented".to_string());
+        connection.write_frame(&response).await.unwrap();
     }
-
-    println!("b rc count after changing a = {}", Rc::strong_count(&b));
-    println!("a rc count after changing a = {}", Rc::strong_count(&a));
-
-    // Uncomment the next line to see that we have a cycle;
-    // it will overflow the stack
-    println!("a next item = {:?}", a.tail());
 }
